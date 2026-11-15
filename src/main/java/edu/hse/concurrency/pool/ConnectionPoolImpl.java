@@ -4,33 +4,35 @@ import java.time.Duration;
 
 public class ConnectionPoolImpl implements ConnectionPool {
 
+    private final PoolEngine engine;
+
     public ConnectionPoolImpl(PoolConfig config, ConnectionFactory factory) {
-        // TODO
+        engine = new PoolEngine(config, factory);
     }
 
     @Override
     public PooledConnection borrow(Duration timeout)
             throws InterruptedException, PoolTimeoutException, ConnectionCreationException {
-        throw new UnsupportedOperationException("TODO");
+        return engine.borrow(timeout);
     }
 
     @Override
     public void resize(int maxSize) {
-        throw new UnsupportedOperationException("TODO");
+        engine.resize(maxSize);
     }
 
     @Override
     public PoolConfig config() {
-        throw new UnsupportedOperationException("TODO");
+        return engine.config();
     }
 
     @Override
     public PoolStats stats() {
-        throw new UnsupportedOperationException("TODO");
+        return engine.stats();
     }
 
     @Override
     public void shutdown(Duration grace) throws InterruptedException {
-        throw new UnsupportedOperationException("TODO");
+        engine.shutdown(grace);
     }
 }
